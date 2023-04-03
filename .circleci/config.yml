@@ -1,15 +1,17 @@
 # This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
-
+orbs:
+  cypress: cypress-io/cypress@3
 jobs:
   test:
-    docker:
-      - image: circleci/node:8
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run: npm ci
-      
+    # docker:
+    #   - image: circleci/node:8
+    # working_directory: ~/repo
+    # steps:
+    #   - checkout
+    #   - run: npm ci
+    - cypress/run:
+          cypress-command: 'npx cypress run --component'  
 workflows:
   version: 2
   test-the-app:
