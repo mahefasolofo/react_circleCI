@@ -9,19 +9,6 @@ jobs:
       - run:
           name: Run Cypress tests
           command: npx cypress run
-
-          version: 2.1
-
-jobs:
-  verification:
-    docker:
-      - image: cypress/base
-    steps:
-      - checkout
-      - run: npm install
-      - run:
-          name: verification lint
-          command: npm run lint
       - run:
           name: Create merged-report Directory
           command: mkdir cypress/merged-report/
