@@ -27,4 +27,9 @@ jobs:
       - store_artifacts:
           name: Uploading mochawesome-html-report
           path: cypress/mochawesome-html-report     
-  
+
+      
+workflows:
+  gegenpressing:
+    jobs:
+      - test     
