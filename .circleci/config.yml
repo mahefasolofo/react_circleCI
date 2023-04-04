@@ -33,11 +33,10 @@ jobs:
       - store_artifacts:
           name: Uploading mochawesome-html-report
           path: cypress/mochawesome-html-report    
-      requires:
-          - test
-        allow_failure: true
+      
 workflows:
   gegenpressing:
     jobs:
       - test
-      - report
+      - report:
+        needs: test
