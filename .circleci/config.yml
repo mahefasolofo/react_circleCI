@@ -9,16 +9,20 @@ jobs:
       - run:
           name: Run Cypress tests
           command: npx cypress run
-      working_directory: /tmp
-  steps:
-    - run:
-        name: Creating Dummy Artifacts
-        command: |
-          echo "my artifact file" > /tmp/art-1;
-          mkdir /tmp/artifacts;
-          echo "my artifact files in a dir" > /tmp/artifacts/art-2;
-    - store_artifacts:
-        path: /tmp/art-1
-        destination: artifact-file
-    - store_artifacts:
-        path: /tmp/artifacts
+      - run:
+          name: Create merged-report Directory
+          command: mkdir cypress/merged-report/
+      - run:
+          name: Merge mochawesome jsons in one file
+          when: always
+          command: npx mochawesome-merge --reportDir root/project/cypress/results > cypress/merged-report/merged-report.json
+      - run:
+          name: Generate mochawesome html report
+          when: always
+          command: npx marge cypress/merged-report/merged-report.json -o cypress/mochawesome-html-report
+      - store_artifacts:
+          name: Uploading mochawesome-merged-report.json
+          path: cypress/merged-report
+      - store_artifacts:
+          name: Uploading mochawesome-html-report
+          path: cypress/mochawesome-html-report
