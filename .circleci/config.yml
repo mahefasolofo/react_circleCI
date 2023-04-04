@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Merge mochawesome jsons in one file
           when: always
-          command: npx mochawesome-merge --reportDir mochawesome-report/ > cypress/merged-report/merged-report.json
+          command: npx mochawesome-merge --reportDir cypress/results > cypress/merged-report/merged-report.json
       - run: ls
       - run:
           name: Generate mochawesome html report
