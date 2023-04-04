@@ -9,19 +9,13 @@ jobs:
       - run:
           name: Run Cypress tests
           command: npx cypress run
-  report:
-    docker:
-      - image: cypress/base
-    steps:
-      - checkout
-      - run: npm install
       - run:
           name: Create merged-report Directory
           command: mkdir cypress/merged-report/      
       - run:
           name: Merge mochawesome jsons in one file
           when: always
-          command: npx mochawesome-merge --reportDir root/project/cypress/results > cypress/merged-report/merged-report.json
+          command: npx mochawesome-merge --reportDir mochawesome-report/ > cypress/merged-report/merged-report.json
       - run: ls
       - run:
           name: Generate mochawesome html report
@@ -32,11 +26,5 @@ jobs:
           path: cypress/merged-report
       - store_artifacts:
           name: Uploading mochawesome-html-report
-          path: cypress/mochawesome-html-report    
-      
-workflows:
-  gegenpressing:
-    jobs:
-      - test
-      - report:
-        needs: test
+          path: cypress/mochawesome-html-report     
+  
