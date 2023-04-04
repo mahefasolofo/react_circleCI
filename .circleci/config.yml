@@ -32,13 +32,12 @@ jobs:
           path: cypress/merged-report
       - store_artifacts:
           name: Uploading mochawesome-html-report
-          path: cypress/mochawesome-html-report
-    when: on_fail
-
+          path: cypress/mochawesome-html-report    
+    requires:
+        - test
+      allow_failure: true
 workflows:
   gegenpressing:
     jobs:
       - test
-      - report:
-          requires:
-            - test
+      - report
