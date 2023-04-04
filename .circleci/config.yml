@@ -11,15 +11,12 @@ jobs:
           command: npx cypress run
       - run:
           name: Create merged-report Directory
-          command: mkdir cypress/merged-report/
-      - run:
-          name: Run mochawesome
-          command: npm run cypress:report    
-          when: always
+          command: mkdir cypress/merged-report/      
       - run:
           name: Merge mochawesome jsons in one file
           when: always
           command: npx mochawesome-merge --reportDir root/project/cypress/results > cypress/merged-report/merged-report.json
+      - run: ls
       - run:
           name: Generate mochawesome html report
           when: always
