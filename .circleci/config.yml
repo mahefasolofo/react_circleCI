@@ -39,5 +39,5 @@ workflows:
     jobs:
       - test
       - report:
-        requires:
-          - test
+          requires:
+            - test
